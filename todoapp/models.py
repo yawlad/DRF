@@ -1,3 +1,4 @@
+from email.policy import default
 from unicodedata import name
 from django.db import models
 
@@ -24,6 +25,7 @@ class ToDo(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
     todo_name = models.CharField(_("todo name"), max_length=256)
     description = models.TextField(_("description"))
+    deleted = models.BooleanField(_("deleted"), default=False)
 
     # class Meta:
     #     """Meta definition for ToDoModel."""
