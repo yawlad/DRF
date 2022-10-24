@@ -6,7 +6,6 @@ class UserModelSerializer(ModelSerializer):
 
     class Meta: 
         model = User
-        fields = ['username']
         fields = ['id', 'username', 'first_name', 'last_name', 'age', 'email']
     
 class UserModelListingField(RelatedField):
@@ -14,3 +13,8 @@ class UserModelListingField(RelatedField):
     def to_representation(self, value):
         return value.username
 
+# class CustomPermissionUserModelSerializer(ModelSerializer):
+
+#     class Meta: 
+#         model = User
+#         fields = '__all__'
