@@ -17,6 +17,7 @@ router.register('projects', ProjectModelViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    
     path('api/auth_token/', obtain_auth_token),
     path('api-auth/', include('rest_framework.urls')),
     
