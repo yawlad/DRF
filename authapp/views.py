@@ -10,7 +10,7 @@ from django.views import View
 from .filters import UserFilter
 from .permissions import IsAdmin ###-CUSTOM_PERMISSIONS-###
 
-from .serializers import UserModelSerializer #CustomPermissionUserModelSerializer
+from .serializers import UserModelSerializer, UserModelSerializerVersion1 #CustomPermissionUserModelSerializer
 from .models import User
 
 
@@ -18,7 +18,11 @@ class UserModelViewSet(ListModelMixin, UpdateModelMixin, GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
     filterset_class = UserFilter
-
+    
+    def get_serializer_class(self):
+        if self.request.version == 'v1':
+            return UserModelSerializerVersion1
+        return UserModelSerializer
 
 # class CustomPermissionUserModelViewSet(ModelViewSet):
 #     queryset = User.objects.all()
