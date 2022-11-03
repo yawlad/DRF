@@ -13,6 +13,11 @@ class UserModelListingField(RelatedField):
     def to_representation(self, value):
         return value.username
 
+class UserModelSerializerVersion1(ModelSerializer):
+    class Meta: 
+        model = User
+        fields = ['id', 'username', 'email']
+
 # class CustomPermissionUserModelSerializer(ModelSerializer):
 
 #     class Meta: 
