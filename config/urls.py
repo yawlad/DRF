@@ -14,6 +14,8 @@ from todoapp.views import ToDoModelViewSet, ProjectModelViewSet
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from graphene_django.views import GraphQLView
+
 schema_view = get_schema_view(
     openapi.Info(
         title='ToDoApp',
@@ -48,4 +50,6 @@ urlpatterns = [
 
     path('swagger/', schema_view.with_ui('swagger')),
     path('redoc/', schema_view.with_ui('redoc')),
+
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
 ]
