@@ -45,13 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'django_filters',
-    'authapp',
-    'corsheaders',
-    'todoapp',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    
+    'django_filters',
+    'corsheaders',
     'drf_yasg',
+    'graphene_django',
+
+    'authapp',
+    'todoapp',
 ]
 
 MIDDLEWARE = [
@@ -195,4 +198,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+GRAPHENE = {
+    "SCHEMA": 'config.schema.schema'
 }
