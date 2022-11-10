@@ -11,6 +11,7 @@ import Cookies from "universal-cookie";
 
 
 import { BrowserRouter, Route, Routes, Link, Navigate } from "react-router-dom"
+import ProjectForm from "./components/ProjectForm";
 
 
 class App extends React.Component {
@@ -106,6 +107,21 @@ class App extends React.Component {
     this.set_token(token)
   }
 
+  create_project(project_name, project_url, users) {
+    const headers =this.get_headers() 
+    const data = {project_name:project_name, project_url:project_url, users:users}
+    axios.post(`http://127.0.0.1:8000/api/projects/`,data, {headers, headers}).then(response => { 
+      this.load_data()
+    }).catch(error =>console.log(error)) 
+  }
+
+  delete_todo(id) {
+    const headers =this.get_headers() 
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}`,{headers, headers}).then(response => { 
+      this.load_data()
+    }).catch(error =>console.log(error)) 
+  }
+
   render() {
     return (
       <div>
@@ -128,8 +144,9 @@ class App extends React.Component {
                 <Route index element={<ProjectList projects={this.state.projects} />} />
                 <Route path=':projectId' element={<ProjectDetail projects={this.state.projects} />} />
               </Route>
+              <Route exact path='/projects/create' element={<ProjectForm users={this.state.users} create_project={(project_name, project_url, users)=>this.create_project(project_name, project_url, users)}/>} />
 
-              <Route exact path='/todos' element={<ToDoList todos={this.state.todos} />} />
+              <Route exact path='/todos' element={<ToDoList todos={this.state.todos} delete_todo={id=>this.delete_todo(id)}/>} />
               <Route exact path='/user' element={<Navigate replace to='/users'/>} />
               <Route exact path='/login' element={<LoginForm get_token={(username, password) => this.get_token(username, password)}/>} />
               <Route exact path='*' element={<NotFound404/>} />
