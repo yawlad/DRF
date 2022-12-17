@@ -117,7 +117,7 @@ class App extends React.Component {
 
   delete_todo(id) {
     const headers =this.get_headers() 
-    axios.delete(`http://127.0.0.1:8000/api/todos/${id}`,{headers, headers}).then(response => { 
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`,{headers, headers}).then(response => { 
       this.load_data()
     }).catch(error =>console.log(error)) 
   }
